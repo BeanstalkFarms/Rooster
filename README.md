@@ -9,6 +9,7 @@ OPENAI_API_KEY=xyz
 ## Running server locally
 ```
 cd server
+pip3 install -r requirements.txt
 export OPENAI_API_KEY=xyz
 waitress-serve --host=0.0.0.0 --port=5001 --call index:create_app
 ```
