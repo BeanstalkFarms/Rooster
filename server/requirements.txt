@@ -1,0 +1,9 @@
+gpt-index==0.3.6
+langchain==0.0.76
+sentencepiece==0.1.97
+flask==2.2.2
+flask_cors==3.0.1
+waitress>==2.1.2
+flask_limiter==3.2.0
+markdown==3.4.1
+beautifulsoup4===4.11.2

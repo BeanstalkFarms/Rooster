@@ -1,0 +1,299 @@
+@font-face {
+    font-family: 'FuturaPTMedium';
+    font-style: normal;
+    font-weight: 400;
+    src: local('FuturaPTMedium'), url(./fonts/FuturaPTMedium.otf) format('opentype');
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'FuturaPTMedium', serif;
+}
+
+.App {
+    background-image: url('./img/background.png');
+    background-color: rgb(160, 198, 226);
+    background-attachment: fixed;
+    background-position: center bottom;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: calc(100vh - 65px);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+}
+
+html, body, #root, .App {
+    width: 100%;
+    height: 100%;
+}
+
+.chat-bot-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.chat-bot-container {
+    width: 100%;
+    height: 100%;
+    max-height: 1000px;
+    background: white;
+    border-radius: 10px;
+    position: relative;
+    padding-top: 30px;
+}
+
+.rooster-logo {
+    display: block;
+    width: 100px;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+.home-link-container {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.home-text {
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin: 0 0.3rem;
+    padding: 0;
+}
+
+.bean-logo {
+    width: 32px;
+}
+
+.title {
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.desc {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin: 10px;
+    padding: 0;
+}
+
+.chat-compose-container {
+    position: absolute;
+    bottom: 10px;
+    width: inherit;
+    padding: 10px 20px;
+}
+
+.chat-compose-container-inner {
+    background: #f4f4f4;
+    display: flex;
+    border-radius: 10px;
+    height: 60px;
+    align-items: center;
+    box-shadow: 0 8px 16px rgba(61, 61, 61, 0.05)
+}
+
+.chat-compose-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 10px 0;
+    position: relative;
+}
+
+.chat-compose-text-container {
+    flex-grow: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.send-btn-container {
+    margin-right: 20px;
+}
+
+.chat-bot-history-container {
+    margin: 20px 20px 100px 20px;
+    overflow: scroll;
+    height: 100%;
+    padding-bottom: 20px;
+}
+
+.chat-message-container {
+    padding: 10px 0;
+}
+
+.chat-name {
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin: 0;
+    padding: 0;
+}
+
+.You {
+    color: rgb(79, 78, 78)
+}
+
+.Rooster {
+    color: #3EB94E;
+}
+
+.chat-msg {
+    font-size: 1.2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.send-btn {
+    cursor: pointer;
+}
+
+.chat-bot-empty-history-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.empty-history-title {
+    font-size: 1.15rem;
+    color: rgba(47,46,44,1);
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.disclaimer {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: rgb(126, 1, 1);
+    padding: 0;
+    margin-bottom: 5px;
+}
+
+.question-prompt {
+    font-size: 1.1rem;
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+    background: #f4f4f4;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 5px 10px;
+    cursor: pointer;
+}
+
+.chat-source {
+    fonts-size: 0.8rem;
+    color: #0b8c1c
+}
+
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    zoom: 0.5;
+    -moz-transform: scale(0.5);
+}
+.lds-ellipsis div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #3EB94E;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes lds-ellipsis3 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+@keyframes lds-ellipsis2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(24px, 0);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .App {
+        padding: 0;
+    }
+
+    .chat-bot-container {
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        padding-top: 0;
+        border-radius: 0;
+    }
+
+    .chat-bot-header {
+        background-image: url('./img/background.png');
+        background-position: center top;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        box-shadow: inset 0 0 0 2000px rgba(255, 255, 255, 0.75);
+    }
+
+    .title {
+        font-size: 1.4rem;
+    }
+
+    .desc {
+        font-size: 1.1rem;
+    }
+
+    .rooster-logo {
+        padding-top: 10px;
+        width: 80px;
+    }
+}
