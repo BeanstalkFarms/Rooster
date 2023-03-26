@@ -11,8 +11,8 @@
 }
 
 .App {
-    background-image: url('./img/background.png');
-    background-color: rgb(160, 198, 226);
+    background-image: url('./img/Spring.svg');
+    background-color: rgb(219, 245, 255);
     background-attachment: fixed;
     background-position: center bottom;
     background-size: 100%;

@@ -190,18 +190,23 @@ def get_answer_with_context(question, context):
 def answer_question(question):
     start = time.time()
     doc_number = get_doc_number_for_question(question)
+    print(f'Took {time.time()-start} seconds to get doc number')
     print(f'Chose document number {doc_number}')
 
+    portion_time = time.time()
     try:
         doc_context, doc_path = get_doc(int(doc_number))
     except ValueError:
         # could not get a document relevant to query
         doc_context = get_doc(13)
         doc_path = './training-data/docs/Farmers-Almanac/introduction/why-beanstalk.md'
+    print(f'Took {time.time()-portion_time} seconds to get document')
 
     glossary_context = get_glossary_context(question)[-1000:]
 
+    portion_time = time.time()
     answer = get_answer_with_context(question, f'{doc_context}\n{glossary_context}')
+    print(f'Took {time.time()-portion_time} seconds to get answer.')
     end = time.time()
     print(f"Time taken: {end-start} seconds")
     return answer, doc_path

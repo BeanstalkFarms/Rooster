@@ -31,8 +31,13 @@ const ChatBot = () => {
             history = history.substring(history.length - maxCharacters);
         }
         const response = (await loadQuestion(message, history));
-        const answer = response.answer;
-        const source = response.source;
+        let answer = response.answer;
+        let source = response.source;
+
+        if (answer === 'I\'m not sure.') {
+            answer = 'I\'m not sure — I\'m only trained on the Farmers\' Almanac at the moment.';
+            source = 'https://docs.bean.money/almanac/';
+        }
 
         addMessage('Rooster', answer, source);
         setLoading(false);
