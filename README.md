@@ -1,4 +1,13 @@
-# beanstalk-chat-bot
+<img src="https://user-images.githubusercontent.com/28496268/227754157-d83c4ae5-de82-43bd-9103-0751b3c268ec.svg" alt="Rooster logo" align="right" width="120" />
+
+# Rooster
+
+[![Discord][discord-badge]][discord-url]
+
+[discord-badge]: https://img.shields.io/discord/880413392916054098?label=Beanstalk
+[discord-url]: https://discord.gg/beanstalk
+
+**Rooster URL: [rooster.bean.money](https://rooster.bean.money)**
 
 ## Environment
 Make sure there is a .env file in server directory
