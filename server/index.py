@@ -185,19 +185,23 @@ def num_tokens_from_string(string: str, encoding_name: str) -> int:
     return num_tokens
 
 
-def get_answer_with_context(question, context):
+def get_answer_with_context(question, history, glossary_context, doc_context):
     prompt = f"""Instructions: You are a chat bot. Answer only questions about Beanstalk as truthfully as possible using the provided text, and if the answer is not contained within the text below, say "I'm not sure". Otherwise, chat freely.
 
         Context:
-        {context}
+        {glossary_context}
+        {doc_context}
+        History: {history}
         Question: {question}
         Answer:"""
 
+    print(prompt)
     print(f'Num tokens: {num_tokens_from_string(prompt, "gpt2")}')
+    print('\n\n\n\n\n')
     # TODO: truncate prompt correctly as needed
     return get_gpt_answer(prompt, 500).strip()
 
-def answer_question(question):
+def answer_question(question, history):
     start = time.time()
     doc_number = get_doc_number_for_question(question)
     print(f'Took {time.time()-start} seconds to get doc number')
@@ -212,10 +216,10 @@ def answer_question(question):
         doc_path = './training-data/docs/Farmers-Almanac/introduction/why-beanstalk.md'
     print(f'Took {time.time()-portion_time} seconds to get document')
 
-    glossary_context = get_glossary_context(question)[-1000:]
+    glossary_context = get_glossary_context(question+' '+history)[-1000:]
 
     portion_time = time.time()
-    answer = get_answer_with_context(question, f'{doc_context}\n{glossary_context}')
+    answer = get_answer_with_context(question, history, glossary_context, doc_context)
     print(f'Took {time.time()-portion_time} seconds to get answer.')
     end = time.time()
     print(f"Time taken: {end-start} seconds")
@@ -227,9 +231,8 @@ def ask():
   history = request.args.get('history')
   query = request.args.get('query')
 
-  # TODO: include history in prompt
   print(f'Question: {query}')
-  answer, doc_path = answer_question(query)
+  answer, doc_path = answer_question(query, history)
 
   source = doc_path.replace('.md', '').split('/')[4:]
   source = 'https://docs.bean.money/almanac/' + '/'.join(source)
