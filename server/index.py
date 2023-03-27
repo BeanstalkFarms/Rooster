@@ -9,6 +9,7 @@ import openai
 import os
 import time
 import requests
+import tiktoken
 
 limiter = Limiter(
     key_func=get_remote_address,
@@ -177,6 +178,13 @@ def split_lookup():
         f.write('\n'.join(lookup2))
 
 
+def num_tokens_from_string(string: str, encoding_name: str) -> int:
+    """Returns the number of tokens in a text string."""
+    encoding = tiktoken.get_encoding(encoding_name)
+    num_tokens = len(encoding.encode(string))
+    return num_tokens
+
+
 def get_answer_with_context(question, context):
     prompt = f"""Instructions: You are a chat bot. Answer only questions about Beanstalk as truthfully as possible using the provided text, and if the answer is not contained within the text below, say "I'm not sure". Otherwise, chat freely.
 
@@ -185,6 +193,7 @@ def get_answer_with_context(question, context):
         Question: {question}
         Answer:"""
 
+    print(f'Num tokens: {num_tokens_from_string(prompt, "gpt2")}')
     # TODO: truncate prompt correctly as needed
     return get_gpt_answer(prompt, 500).strip()
 
