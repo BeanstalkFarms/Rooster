@@ -178,7 +178,7 @@ def split_lookup():
 
 
 def get_answer_with_context(question, context):
-    prompt = f"""Instructions: Answer the question about Beanstalk as truthfully as possible using the provided text, and if the answer is not contained within the text below, say "I'm not sure"
+    prompt = f"""Instructions: You are a chat bot. Answer only questions about Beanstalk as truthfully as possible using the provided text, and if the answer is not contained within the text below, say "I'm not sure". Otherwise, chat freely.
 
         Context:
         {context}
