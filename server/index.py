@@ -20,6 +20,7 @@ limiter.init_app(app)
 CORS(app)
 
 glossary = open('./training-data/docs/Farmers-Almanac/protocol/glossary.md', 'r').read()
+additional_glossary = [{'word': 'yield', 'line': 'Volatility and yield are baked into the Bean token itself—when the Bean price is too high, Beanstalk mints new Beans and distributes them to various ecosystem participants in a deterministic fashion. This seigniorage is the positive carry that the Beanstalk economy is based on.'}]
 
 def md_to_text(md):
     """
@@ -218,6 +219,7 @@ def ask():
   query = request.args.get('query')
 
   # TODO: include history in prompt
+  print(f'Question: {query}')
   answer, doc_path = answer_question(query)
 
   source = doc_path.replace('.md', '').split('/')[4:]
@@ -233,4 +235,4 @@ def create_app():
 
 split_lookup()
 glossary = process_glossary(glossary)
-glossary = glossary
+glossary = glossary + additional_glossary

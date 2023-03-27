@@ -26,7 +26,7 @@
 26:  Guides - Silo - Claim Assets:  Claim Assets, Withdrawing Deposited Assets, Withdrawn Assets, Claimable Assets, Make sure you are on app.bean.money, Navigate to the “Silo” page, Deposit Whitelist, Select the asset you Withdrew, Claim tab, Destination, Circulating Balance, Farm Balance, LP Tokens, Claim as, Slippage Tolerance, Transaction Details, Confirm the transaction, Circulating Balance, Farm Balance.
 27:  Guides - Silo - Withdraw:  Withdraw, Silo, Stalk, Seeds, Deposit, Whitelist, Transaction, Confirm, Claimable, Season
 28:  Guides - Silo - Deposit:  Deposit, Whitelist, Silo, Stalk, Seeds, App.bean.money, Assets, Token, Slippage, Tolerance, Approve, Transaction, Confirm, Hardware Wallet
-29:  Guides - Silo - Understand Vapy:  vAPY, Bean vAPY, Stalk vAPY, Estimating Earned Beans per Season, Exponential Moving Average (EMA), APY: Silo Deposits, Calculations
+29:  Guides - Silo - Understand Vapy:  vAPY, Bean vAPY, Stalk vAPY, Estimating Earned Beans per Season, Exponential Moving Average (EMA): Silo Deposits, Calculations
 30:  Guides - Silo - Claim Rewards:  Mow, Plant, Enroot, Claim all Silo Rewards
 31:  Guides - Silo - Convert:  Convert, Silo, Peg Maintenance, Deposited Assets, App.bean.money, Whitelist, Convert Whitelist, DeltaB, Stalk, Seeds, Slippage Tolerance, Transaction Details, Confirm, Contract
 32:  Guides - Sun - Understand Price:  Bean Price, Credit, Value Peg, Oscillation, Peg Maintenance Mechanism, Liquidity Pools, BEAN:3CRV Metapool, Curve, USD Denominated Price, Total Liquidity, DeltaB, Bean Supply, Soil Supply.
