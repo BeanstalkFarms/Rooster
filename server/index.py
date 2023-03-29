@@ -89,8 +89,12 @@ def get_gpt_answer(prompt, max_tokens):
 def get_doc_for_question_helper(question, doc):
     with open(doc, "r") as f:
         lookup = f.read()
-    prompt = f"""Instructions: You are tasked with selecting the correct document relevant to answering a question. Try to match keywords in the question to the document.
-If the question is about price, the document is 15.
+    prompt = f"""Instructions: You are tasked with selecting the correct document relevant to answering a question.
+Pick the document that most closely matches the question by matching words in the question to the document keywords.
+The list is formatted as title: keywords.
+If the question is about:
+- price, the document is 15.
+- seeds or stalk, the document is 3 or 14.
 Documents:
 {lookup}
 Question: {question}
@@ -216,7 +220,7 @@ def answer_question(question, history):
         doc_path = './training-data/docs/Farmers-Almanac/introduction/why-beanstalk.md'
     print(f'Took {time.time()-portion_time} seconds to get document')
 
-    glossary_context = get_glossary_context(question+' '+history)[-1000:]
+    glossary_context = get_glossary_context(question+' '+history[-1000:])
 
     portion_time = time.time()
     answer = get_answer_with_context(question, history, glossary_context, doc_context)
