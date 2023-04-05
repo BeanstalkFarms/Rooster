@@ -201,23 +201,29 @@ def num_tokens_from_string(string: str, encoding_name: str) -> int:
     return num_tokens
 
 
+def get_formatted_prompt(question, history, glossary_context, doc_context):
+    return f"""Instructions: You are a chat bot. Answer only questions about Beanstalk as truthfully as possible using the provided text, and if the answer is not contained within the text below, say "I'm not sure". Otherwise, chat freely.
+
+Context:
+{glossary_context}
+{doc_context}
+History: {history}
+Question: {question}
+Answer:"""
+
 def get_answer_with_context(question, history, glossary_context, doc_context):
-    prompt = f"""Instructions: You are a chat bot. Answer only questions about Beanstalk as truthfully as possible using the provided text, and if the answer is not contained within the text below, say "I'm not sure". Otherwise, chat freely.
-
-        Context:
-        {glossary_context}
-        {doc_context}
-        History: {history}
-        Question: {question}
-        Answer:"""
-
+    prompt = get_formatted_prompt(question, history, glossary_context, doc_context)
     num_tokens = num_tokens_from_string(prompt, "p50k_base")
     print(f'Num tokens: {num_tokens}')
-    print(f'glossary_context tokens: {num_tokens_from_string(glossary_context, "p50k_base")}')
-    print('\n\n\n\n\n')
     # truncate prompt correctly as needed
     if num_tokens > 3500:
         num_token_excess = num_tokens - 3500
+        doc_context_num_tokens = num_tokens_from_string(doc_context, "p50k_base")
+        max_doc_context_len = int((1 - num_token_excess / doc_context_num_tokens) * len(doc_context))
+        doc_context = doc_context[:max_doc_context_len]
+        prompt = get_formatted_prompt(question, history, glossary_context, doc_context)
+        print(f'Truncated query. New num tokens: {num_tokens_from_string(prompt, "p50k_base")}')
+
     return get_gpt_answer(prompt, 500).strip()
 
 def answer_question(question, history):
@@ -258,6 +264,7 @@ def ask():
 
   print(f'Question: {query}')
   answer, doc_path = answer_question(query, history)
+  print('\n\n\n\n\n')
 
   source = doc_path.replace('README.md', '').replace('.md', '').split('/')[4:]
   source = 'https://docs.bean.money/almanac/' + '/'.join(source)
