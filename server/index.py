@@ -106,6 +106,7 @@ The list is formatted as title: keywords.
 If the question is about:
 - price, the document is 15.
 - seeds or stalk, the document is 3 or 14.
+- general info, the document is 13.
 Documents:
 {lookup}
 Question: {question}
@@ -210,10 +211,13 @@ def get_answer_with_context(question, history, glossary_context, doc_context):
         Question: {question}
         Answer:"""
 
-    print(prompt)
-    print(f'Num tokens: {num_tokens_from_string(prompt, "gpt2")}')
+    num_tokens = num_tokens_from_string(prompt, "p50k_base")
+    print(f'Num tokens: {num_tokens}')
+    print(f'glossary_context tokens: {num_tokens_from_string(glossary_context, "p50k_base")}')
     print('\n\n\n\n\n')
-    # TODO: truncate prompt correctly as needed
+    # truncate prompt correctly as needed
+    if num_tokens > 3500:
+        num_token_excess = num_tokens - 3500
     return get_gpt_answer(prompt, 500).strip()
 
 def answer_question(question, history):
@@ -245,6 +249,12 @@ def answer_question(question, history):
 def ask():
   history = request.args.get('history')
   query = request.args.get('query')
+
+  num_tokens_in_query = num_tokens_from_string(query, "p50k_base")
+  if num_tokens_in_query > 250:
+    return jsonify({
+      'answer': 'Please shorten your question.'
+    })
 
   print(f'Question: {query}')
   answer, doc_path = answer_question(query, history)
