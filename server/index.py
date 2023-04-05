@@ -238,7 +238,7 @@ def ask():
   print(f'Question: {query}')
   answer, doc_path = answer_question(query, history)
 
-  source = doc_path.replace('.md', '').split('/')[4:]
+  source = doc_path.replace('README.md', '').replace('.md', '').split('/')[4:]
   source = 'https://docs.bean.money/almanac/' + '/'.join(source)
 
   return jsonify({
