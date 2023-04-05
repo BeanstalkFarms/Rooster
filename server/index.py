@@ -75,15 +75,26 @@ def get_glossary_context(str):
 
 
 def get_gpt_answer(prompt, max_tokens):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
-        max_tokens=max_tokens,
-        n=1,
-        stop=None,
-        temperature=0.0,
-    )
-    return response.choices[0].text
+    max_retries = 3
+    retries = 0
+    wait_time = 2  # initial wait time in seconds
+    while retries < max_retries:
+        try:
+            response = openai.Completion.create(
+                engine="text-davinci-003",
+                prompt=prompt,
+                max_tokens=max_tokens,
+                n=1,
+                stop=None,
+                temperature=0.0,
+            )
+            return response.choices[0].text
+        except Exception as e:
+            retries += 1
+            print(f"Error: {str(e)}. Retrying in {wait_time} seconds...")
+            time.sleep(wait_time)
+            wait_time *= 2  # exponential back-off
+    raise Exception(f"Failed after {max_retries} retries.")
 
 
 def get_doc_for_question_helper(question, doc):
